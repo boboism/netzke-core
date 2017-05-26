@@ -73,6 +73,9 @@ module Netzke
         # ExtJS base
         res = ["#{Netzke::Core.ext_uri}/packages/ext-theme-#{params[:theme]}/build/resources/ext-theme-#{params[:theme]}-all.css"]
 
+        # Ext Charts
+        res << (params[:minified] ? "#{Netzke::Core.ext_uri}/packages/ext-charts/build/resources/ext-charts-all.css" : "#{Netzke::Core.ext_uri}/packages/ext-charts/build/resources/ext-charts-all-debug.css") if !!params[:charts]
+
         # Netzke-related dynamic css
         res << netzke_ext_path
 
@@ -98,6 +101,9 @@ module Netzke
 
         # Ext I18n
         res << "#{Netzke::Core.ext_uri}/packages/ext-locale/build/ext-locale-#{I18n.locale}" if I18n.locale != :en
+
+        # Ext Charts
+        res << (params[:minified] ? "#{Netzke::Core.ext_uri}/packages/ext-charts/build/ext-charts.js" : "#{Netzke::Core.ext_uri}/packages/ext-charts/build/ext-charts-debug.js") if !!params[:charts]
 
         # Netzke-related dynamic JavaScript
         res << netzke_ext_path
